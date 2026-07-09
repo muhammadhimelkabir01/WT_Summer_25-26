@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student Service Request Portal</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <header>
+        <h1>Student Service Request Portal</h1>
+        <p>Submit your university service requests quickly and easily.</p>
+    </header>
+
+    <nav>
+        <a href="#">Home</a>
+        <a href="#">Services</a>
+        <a href="#">Contact</a>
+    </nav>
+
+    <main>
+
+        <section class="services">
+            <h2>Available Services</h2>
+            <p>
+                Welcome to the Student Service Portal. Students can request
+                transcripts, ID cards, bonafide certificates, and submit
+                general inquiries through this portal.
+            </p>
+        </section>
+
+        <section class="form-section">
+            <h2>Service Request Form</h2>
+
+            <form>
+
+                <label for="name">Student Name</label>
+                <input type="text" id="name" required>
+
+                <label for="id">Student ID</label>
+                <input type="text" id="id" maxlength="10" required>
+
+                <label for="email">Email</label>
+                <input type="email" id="email" required>
+
+                <label for="service">Service Type</label>
+                <select id="service">
+                    <option>Transcript Request</option>
+                    <option>ID Card Issue</option>
+                    <option>General Inquiry</option>
+                </select>
+
+                <label>Urgency Level</label>
+
+                <input type="radio" id="low" name="urgency">
+                <label for="low">Low</label>
+
+                <input type="radio" id="medium" name="urgency">
+                <label for="medium">Medium</label>
+
+                <input type="radio" id="high" name="urgency">
+                <label for="high">High</label>
+
+                <br><br>
+
+                <label for="details">Additional Details</label>
+                <textarea id="details" rows="5"></textarea>
+
+                <br><br>
+
+                <button type="submit">Submit</button>
+
+            </form>
+        </section>
+
+    </main>
+
+    <footer>
+        <p>&copy; 2025 Student Affairs Department. All Rights Reserved.</p>
+    </footer>
+
+</body>
+</html>
