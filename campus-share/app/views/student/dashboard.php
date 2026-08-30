@@ -50,3 +50,68 @@ require_once __DIR__ . '/../layouts/header.php';
         border-spacing: 0;
         margin: 0;
     }
+
+    .dash-table th {
+        background-color: #f8fafc;
+        color: #475569;
+        font-size: 12px;
+        font-weight: 700;
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
+        padding: 14px 16px;
+        text-align: left;
+        border-bottom: 1px solid #cbd5e1;
+        white-space: nowrap;
+    }
+
+    .dash-table td {
+        padding: 16px;
+        vertical-align: middle;
+        border-bottom: 1px solid #f1f5f9;
+        color: #334155;
+        font-size: 14px;
+        white-space: nowrap;
+    }
+
+    .dash-table tbody tr:hover {
+        background-color: #f8fafc;
+        transition: background-color 0.2s ease;
+    }
+
+    .owner-info {
+        display: flex;
+        flex-direction: column;
+        gap: 4px;
+    }
+    .owner-name {
+        font-weight: 600;
+        color: #0f172a;
+    }
+    .owner-email-chip {
+        display: inline-flex;
+        align-items: center;
+        gap: 5px;
+        background-color: #eff6ff;
+        color: #1d4ed8;
+        border: 1px solid #bfdbfe;
+        padding: 3px 8px;
+        border-radius: 6px;
+        font-size: 11px;
+        text-decoration: none;
+        font-weight: 500;
+        width: fit-content;
+    }
+    .owner-email-chip:hover {
+        background-color: #dbeafe;
+    }
+
+    .badge-soft-success {
+        background-color: #dcfce7;
+        color: #15803d;
+        border: 1px solid #bbf7d0;
+        padding: 5px 10px;
+        border-radius: 20px;
+        font-size: 12px;
+        font-weight: 600;
+        display: inline-block;
+    }
