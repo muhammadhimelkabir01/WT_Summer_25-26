@@ -246,3 +246,40 @@ require_once __DIR__ . '/../layouts/header.php';
         </div>
     <?php endif; ?>
 </div>
+
+<!-- Section 2: Free Donation Claims -->
+<div class="custom-card">
+    <div class="card-title"> My Free Donation Claims</div>
+    <?php if (empty($donations)): ?>
+        <p style="color: #64748b; font-size: 14px; margin: 10px 0;">No donation requests submitted yet.</p>
+    <?php else: ?>
+        <div class="table-responsive">
+            <table class="dash-table">
+                <thead>
+                    <tr>
+                        <th>Item Title</th>
+                        <th>Claimed From</th>
+                        <th>Your Message / Reason</th>
+                        <th>Status</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <?php foreach ($donations as $d): ?>
+                        <tr>
+                            <td><strong style="color: #0f172a;"><?= htmlspecialchars($d['title']); ?></strong></td>
+                            <td><?= htmlspecialchars($d['owner_name']); ?></td>
+                            <td style="color: #475569;"><?= htmlspecialchars($d['request_message']); ?></td>
+                            <td>
+                                <span class="badge-soft-warning">
+                                    <?= strtoupper(htmlspecialchars($d['status'])); ?>
+                                </span>
+                            </td>
+                        </tr>
+                    <?php endforeach; ?>
+                </tbody>
+            </table>
+        </div>
+    <?php endif; ?>
+</div>
+
+<?php require_once __DIR__ . '/../layouts/footer.php'; ?>
