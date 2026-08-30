@@ -19,3 +19,16 @@ class DonationRequest {
             ':msg' => $message
         ]);
     }
+
+    public function getByStudentId($studentId) {
+        $sql = "SELECT dr.*, r.title, u.full_name as owner_name
+                FROM `donation_request` dr
+                JOIN `resource` r ON dr.resource_id = r.resource_id
+                JOIN `user` u ON r.user_id = u.user_id
+                WHERE dr.user_id = :student_id
+                ORDER BY dr.created_at DESC";
+        $stmt = $this->db->prepare($sql);
+        $stmt->execute([':student_id' => $studentId]);
+        return $stmt->fetchAll();
+    }
+}
