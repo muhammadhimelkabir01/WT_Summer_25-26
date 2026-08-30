@@ -115,3 +115,59 @@ require_once __DIR__ . '/../layouts/header.php';
         font-weight: 600;
         display: inline-block;
     }
+
+    .badge-soft-warning {
+        background-color: #fef3c7;
+        color: #b45309;
+        border: 1px solid #fde68a;
+        padding: 5px 10px;
+        border-radius: 20px;
+        font-size: 12px;
+        font-weight: 600;
+        display: inline-block;
+    }
+
+    .btn-pay-now {
+        background: linear-gradient(135deg, #e2136e 0%, #c2105e 100%);
+        color: white !important;
+        padding: 6px 14px;
+        border-radius: 6px;
+        font-size: 12px;
+        font-weight: 600;
+        text-decoration: none;
+        box-shadow: 0 2px 6px rgba(226, 19, 110, 0.25);
+        display: inline-block;
+    }
+    .btn-pay-now:hover {
+        opacity: 0.95;
+    }
+
+    .btn-cancel-link {
+        color: #ef4444;
+        font-size: 13px;
+        font-weight: 600;
+        text-decoration: none;
+        padding: 4px 8px;
+        border-radius: 4px;
+    }
+    .btn-cancel-link:hover {
+        background-color: #fef2f2;
+    }
+</style>
+
+<div class="dashboard-header">
+    <h2 class="dashboard-title">Student Dashboard</h2>
+    <p class="dashboard-subtitle">Track your active rental bookings, donation claims, and payment receipts.</p>
+</div>
+
+<?php if (isset($_GET['paid'])): ?>
+    <div style="background-color: #dcfce7; color: #15803d; padding: 14px 18px; border-radius: 8px; margin-bottom: 20px; font-size: 14px; border: 1px solid #bbf7d0;">
+        ✓ Payment Successful! Your Simulated TXN-ID: <strong><?= htmlspecialchars($_GET['txnid'] ?? 'N/A'); ?></strong>
+    </div>
+<?php endif; ?>
+
+<?php if (isset($_GET['cancelled'])): ?>
+    <div style="background-color: #fef3c7; color: #b45309; padding: 14px 18px; border-radius: 8px; margin-bottom: 20px; font-size: 14px; border: 1px solid #fde68a;">
+        ⓘ Booking request cancelled successfully.
+    </div>
+<?php endif; ?>
