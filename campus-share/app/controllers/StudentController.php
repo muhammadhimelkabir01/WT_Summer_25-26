@@ -76,3 +76,24 @@ class StudentController {
             exit;
         }
     }
+    
+    public function requestDonation() {
+        if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+            $resourceId = $_POST['resource_id'];
+            $message = trim($_POST['request_message']);
+
+            $this->donationModel->create($_SESSION['user_id'], $resourceId, $message);
+            header("Location: index.php?route=student/dashboard&donation_sent=1");
+            exit;
+        }
+    }
+
+    public function cancelRental() {
+        $rentalId = $_GET['id'] ?? null;
+        if ($rentalId) {
+            $this->rentalModel->cancel($rentalId, $_SESSION['user_id']);
+            header("Location: index.php?route=student/dashboard&cancelled=1");
+            exit;
+        }
+    }
+}
