@@ -45,3 +45,27 @@ class RentalRequest {
         $stmt->execute([':student_id' => $studentId]);
         return $stmt->fetchAll();
     }
+
+    public function getIncomingByOwnerId($ownerId) {
+        $sql = "SELECT rr.*, r.title, u.full_name as student_name, u.email as student_email, p.payment_status, p.transaction_id
+                FROM `rental_request` rr
+                JOIN `resource` r ON rr.resource_id = r.resource_id
+                JOIN `user` u ON rr.user_id = u.user_id
+                LEFT JOIN `payment` p ON rr.rental_id = p.rental_id
+                WHERE r.user_id = :owner_id
+                ORDER BY rr.created_at DESC";
+        $stmt = $this->db->prepare($sql);
+        $stmt->execute([':owner_id' => $ownerId]);
+        return $stmt->fetchAll();
+    }
+
+    public function updateStatus($rentalId, $status) {
+        $stmt = $this->db->prepare("UPDATE `rental_request` SET `status` = :status WHERE `rental_id` = :id");
+        return $stmt->execute([':status' => $status, ':id' => $rentalId]);
+    }
+
+    public function cancel($rentalId, $userId) {
+        $stmt = $this->db->prepare("DELETE FROM `rental_request` WHERE `rental_id` = :id AND `user_id` = :uid AND `status` = 'pending'");
+        return $stmt->execute([':id' => $rentalId, ':uid' => $userId]);
+    }
+}
