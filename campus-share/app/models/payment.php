@@ -44,3 +44,10 @@ class Payment {
 
         return $txnId;
     }
+
+    public function getByRentalId($rentalId) {
+        $stmt = $this->db->prepare("SELECT * FROM `payment` WHERE `rental_id` = :id LIMIT 1");
+        $stmt->execute([':id' => $rentalId]);
+        return $stmt->fetch();
+    }
+}
