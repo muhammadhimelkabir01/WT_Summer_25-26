@@ -171,3 +171,78 @@ require_once __DIR__ . '/../layouts/header.php';
         ⓘ Booking request cancelled successfully.
     </div>
 <?php endif; ?>
+
+<!-- Section 1: Rental Bookings -->
+<div class="custom-card">
+    <div class="card-title"> My Rental Bookings</div>
+    
+    <?php if (empty($rentals)): ?>
+        <p style="color: #64748b; font-size: 14px; margin: 10px 0;">No active rental requests found. <a href="index.php?route=home" style="color: #2563eb; font-weight: 600;">Browse catalog</a> to rent academic items.</p>
+    <?php else: ?>
+        <div class="table-responsive">
+            <table class="dash-table">
+                <thead>
+                    <tr>
+                        <th>Item Title</th>
+                        <th>Owner Contact</th>
+                        <th>Rental Duration</th>
+                        <th>Total Rent</th>
+                        <th>Deposit</th>
+                        <th>Payment Status</th>
+                        <th>Booking Status</th>
+                        <th style="text-align: center;">Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <?php foreach ($rentals as $r): ?>
+                        <tr>
+                            <td>
+                                <strong style="color: #0f172a; font-size: 15px;"><?= htmlspecialchars($r['title']); ?></strong>
+                            </td>
+                            <td>
+                                <div class="owner-info">
+                                    <span class="owner-name"><?= htmlspecialchars($r['owner_name']); ?></span>
+                                    <a href="mailto:<?= htmlspecialchars($r['owner_email']); ?>" class="owner-email-chip">
+                                        ✉ <?= htmlspecialchars($r['owner_email']); ?>
+                                    </a>
+                                </div>
+                            </td>
+                            <td style="color: #475569;">
+                                <?= htmlspecialchars($r['start_date']); ?> <span style="color:#94a3b8;">to</span> <?= htmlspecialchars($r['end_date']); ?>
+                            </td>
+                            <td><strong style="color: #0f172a;">৳<?= number_format($r['total_rent'], 2); ?></strong></td>
+                            <td style="color: #64748b;">৳<?= number_format($r['security_deposit'], 2); ?></td>
+                            <td>
+                                <?php if (!empty($r['payment_status']) && strtolower(trim($r['payment_status'])) === 'paid'): ?>
+                                    <span class="badge-soft-success" title="TXN: <?= htmlspecialchars($r['transaction_id'] ?? ''); ?>">
+                                        ✓ Paid (<?= htmlspecialchars($r['transaction_id'] ?? ''); ?>)
+                                    </span>
+                                <?php else: ?>
+                                    <a href="index.php?route=student/checkout&rental_id=<?= $r['rental_id']; ?>" class="btn-pay-now">
+                                        Pay Now
+                                    </a>
+                                <?php endif; ?>
+                            </td>
+                            <td>
+                                <span class="badge-soft-warning">
+                                    <?= strtoupper(htmlspecialchars($r['status'])); ?>
+                                </span>
+                            </td>
+                            <td style="text-align: center;">
+                                <?php if ($r['status'] === 'pending'): ?>
+                                    <a href="index.php?route=student/cancel-rental&id=<?= $r['rental_id']; ?>" 
+                                       class="btn-cancel-link"
+                                       onclick="return confirm('Are you sure you want to cancel this booking?');">
+                                        Cancel
+                                    </a>
+                                <?php else: ?>
+                                    <span style="color: #94a3b8; font-size: 13px;">Locked</span>
+                                <?php endif; ?>
+                            </td>
+                        </tr>
+                    <?php endforeach; ?>
+                </tbody>
+            </table>
+        </div>
+    <?php endif; ?>
+</div>
