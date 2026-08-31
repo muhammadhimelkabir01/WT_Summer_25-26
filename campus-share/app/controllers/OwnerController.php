@@ -50,3 +50,24 @@ class OwnerController {
             }
         }
     }
+
+     public function deleteResource() {
+        $resourceId = $_GET['id'] ?? null;
+        if ($resourceId) {
+            $this->resourceModel->delete($resourceId, $_SESSION['user_id']);
+            header("Location: index.php?route=owner/dashboard&deleted=1");
+            exit;
+        }
+    }
+
+    public function updateRentalStatus() {
+        $rentalId = $_GET['id'] ?? null;
+        $status = $_GET['status'] ?? null;
+
+        if ($rentalId && in_array($status, ['accepted', 'rejected', 'handed_over', 'returned'])) {
+            $this->rentalModel->updateStatus($rentalId, $status);
+            header("Location: index.php?route=owner/dashboard&status_updated=1");
+            exit;
+        }
+    }
+}
