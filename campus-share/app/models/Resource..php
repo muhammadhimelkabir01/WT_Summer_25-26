@@ -44,3 +44,18 @@ class Resource {
 
     public function getById($id) {
         $sql = "SELECT r.*, c.category_name, u.full_name as owner_name, u.email as owner_email 
+        FROM `resource` r
+                JOIN `category` c ON r.category_id = c.category_id
+                JOIN `user` u ON r.user_id = u.user_id
+                WHERE r.resource_id = :id LIMIT 1";
+        $stmt = $this->db->prepare($sql);
+        $stmt->execute([':id' => $id]);
+        return $stmt->fetch();
+    }
+
+    public function getByOwnerId($ownerId) {
+        $sql = "SELECT r.*, c.category_name 
+                FROM `resource` r
+                JOIN `category` c ON r.category_id = c.category_id
+                WHERE r.user_id = :owner_id
+                ORDER BY r.created_at DESC";
