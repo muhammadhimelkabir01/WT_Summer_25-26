@@ -23,3 +23,13 @@ class OwnerController {
         
         require_once __DIR__ . '/../views/owner/dashboard.php';
     }
+
+    public function addResource() {
+        if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+            $title = trim($_POST['title'] ?? '');
+            $categoryId = $_POST['category_id'] ?? '';
+            $description = trim($_POST['description'] ?? '');
+            $itemCondition = $_POST['item_condition'] ?? 'used';
+            $sharingType = $_POST['sharing_type'] ?? 'rent';
+            $dailyRate = ($sharingType === 'rent') ? floatval($_POST['daily_rate'] ?? 0) : 0.00;
+            $securityDeposit = ($sharingType === 'rent') ? floatval($_POST['security_deposit'] ?? 0) : 0.00;
