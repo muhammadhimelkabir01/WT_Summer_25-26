@@ -225,3 +225,27 @@ require_once __DIR__ . '/../layouts/header.php';
                                 <?= htmlspecialchars($req['start_date']); ?> <span style="color:#94a3b8;">to</span> <?= htmlspecialchars($req['end_date']); ?>
                             </td>
                             <td>
+
+             <?php if (!empty($req['payment_status']) && strtolower($req['payment_status']) === 'paid'): ?>
+                                    <span class="badge-status badge-paid">Paid</span>
+                                <?php else: ?>
+                                    <span class="badge-status badge-unpaid">Unpaid</span>
+                                <?php endif; ?>
+                            </td>
+                            <td>
+                                <?php 
+                                    $st = strtolower($req['status']);
+                                    $badgeClass = 'badge-pending';
+                                    if ($st === 'accepted') $badgeClass = 'badge-accepted';
+                                    elseif ($st === 'handed_over') $badgeClass = 'badge-handed';
+                                    elseif ($st === 'returned') $badgeClass = 'badge-returned';
+                                ?>
+                                <span class="badge-status <?= $badgeClass; ?>">
+                                    <?= strtoupper(str_replace('_', ' ', $req['status'])); ?>
+                                </span>
+                            </td>
+                            <td style="text-align: center; white-space: nowrap;">
+                                <?php if ($st === 'pending'): ?>
+                                    <a href="index.php?route=owner/update-status&id=<?= $req['rental_id']; ?>&status=accepted" class="btn-action-accept">
+                                        Accept Request
+                                    </a>
