@@ -33,3 +33,20 @@ class OwnerController {
             $sharingType = $_POST['sharing_type'] ?? 'rent';
             $dailyRate = ($sharingType === 'rent') ? floatval($_POST['daily_rate'] ?? 0) : 0.00;
             $securityDeposit = ($sharingType === 'rent') ? floatval($_POST['security_deposit'] ?? 0) : 0.00;
+
+             if (!empty($title) && !empty($categoryId)) {
+                $this->resourceModel->create(
+                    $_SESSION['user_id'],
+                    $categoryId,
+                    $title,
+                    $description,
+                    $itemCondition,
+                    $sharingType,
+                    $dailyRate,
+                    $securityDeposit
+                );
+                header("Location: index.php?route=owner/dashboard&success=1");
+                exit;
+            }
+        }
+    }
