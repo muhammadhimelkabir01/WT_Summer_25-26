@@ -279,4 +279,42 @@ require_once __DIR__ . '/../layouts/header.php';
             <div class="form-group">
                 <label>Item Title</label>
                 <input type="text" name="title" required autocomplete="off">
+            </div>
+             <div class="form-group">
+                <label>Category</label>
+                <select name="category_id" required>
+                    <option value="">Select Category</option>
+                    <?php foreach ($categories as $c): ?>
+                        <option value="<?= $c['category_id']; ?>"><?= htmlspecialchars($c['category_name']); ?></option>
+                    <?php endforeach; ?>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label>Item Condition</label>
+                <select name="item_condition" required>
+                    <option value="brand_new">Brand New</option>
+                    <option value="like_new">Like New</option>
+                    <option value="used">Used</option>
+                    <option value="fair">Fair</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label>Sharing Type</label>
+                <select name="sharing_type" required>
+                    <option value="rent">For Rent</option>
+                    <option value="donate">Free Donation</option>
+                </select>
+            </div>
+
+            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px;">
+                <div class="form-group">
+                    <label>Daily Rate (৳)</label>
+                    <input type="number" step="0.01" name="daily_rate" value="0.00" required>
+                </div>
+                <div class="form-group">
+                    <label>Deposit (৳)</label>
+                    <input type="number" step="0.01" name="security_deposit" value="0.00" required>
+                </div>
             </div>                                   
