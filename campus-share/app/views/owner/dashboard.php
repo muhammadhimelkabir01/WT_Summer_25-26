@@ -175,3 +175,28 @@ require_once __DIR__ . '/../layouts/header.php';
     }
     .student-chip strong {
         color: #0f172a;
+
+         }
+    .student-chip a {
+        color: #0284c7;
+        text-decoration: none;
+        font-size: 11px;
+    }
+</style>
+
+<div class="owner-header">
+    <h2>Resource Owner Dashboard</h2>
+    <p>Manage listings, accept student bookings, and update handover lifecycle.</p>
+</div>
+
+<!-- Section 1: Incoming Rental Requests -->
+<div class="custom-panel">
+    <div class="panel-header-title"> Incoming Rental Requests from Students</div>
+
+    <?php if (empty($incomingRentals)): ?>
+        <p style="color: #64748b; font-size: 13px; margin: 5px 0;">No student rental requests received yet.</p>
+    <?php else: ?>
+        <div class="table-container">
+            <table class="clean-table">
+                <thead>
+                    <tr>
