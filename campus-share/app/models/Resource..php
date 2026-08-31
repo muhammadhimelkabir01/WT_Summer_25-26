@@ -59,3 +59,29 @@ class Resource {
                 JOIN `category` c ON r.category_id = c.category_id
                 WHERE r.user_id = :owner_id
                 ORDER BY r.created_at DESC";
+                $stmt = $this->db->prepare($sql);
+        $stmt->execute([':owner_id' => $ownerId]);
+        return $stmt->fetchAll();
+    }
+
+    public function create($userId, $categoryId, $title, $description, $itemCondition, $sharingType, $dailyRate, $securityDeposit) {
+        $sql = "INSERT INTO `resource` (`user_id`, `category_id`, `title`, `description`, `item_condition`, `sharing_type`, `daily_rate`, `security_deposit`, `is_available`) 
+                VALUES (:user_id, :category_id, :title, :description, :item_condition, :sharing_type, :daily_rate, :security_deposit, 1)";
+        $stmt = $this->db->prepare($sql);
+        return $stmt->execute([
+            ':user_id' => $userId,
+            ':category_id' => $categoryId,
+            ':title' => $title,
+            ':description' => $description,
+            ':item_condition' => $itemCondition,
+            ':sharing_type' => $sharingType,
+            ':daily_rate' => $dailyRate,
+            ':security_deposit' => $securityDeposit
+        ]);
+    }
+
+    public function delete($resourceId, $ownerId) {
+        $stmt = $this->db->prepare("DELETE FROM `resource` WHERE `resource_id` = :id AND `user_id` = :owner_id");
+        return $stmt->execute([':id' => $resourceId, ':owner_id' => $ownerId]);
+    }
+}
