@@ -46,3 +46,56 @@ require_once __DIR__ . '/../layouts/header.php';
         align-items: center;
         gap: 8px;
     }
+
+     /* Table Styling */
+    .table-container {
+        width: 100%;
+        overflow-x: auto;
+    }
+
+    .clean-table {
+        width: 100%;
+        border-collapse: collapse;
+        font-size: 13px;
+    }
+
+    .clean-table th {
+        background-color: #f8fafc;
+        color: #475569;
+        font-size: 11px;
+        font-weight: 700;
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
+        padding: 12px 14px;
+        text-align: left;
+        border-bottom: 2px solid #e2e8f0;
+        white-space: nowrap;
+    }
+
+    .clean-table td {
+        padding: 14px;
+        vertical-align: middle;
+        border-bottom: 1px solid #f1f5f9;
+        color: #334155;
+    }
+
+    .clean-table tbody tr:hover {
+        background-color: #f8fafc;
+    }
+
+    /* Status Badges */
+    .badge-status {
+        display: inline-block;
+        padding: 4px 8px;
+        border-radius: 4px;
+        font-size: 11px;
+        font-weight: 700;
+        text-transform: uppercase;
+    }
+
+    .badge-paid {
+        background: #dcfce7;
+        color: #15803d;
+        border: 1px solid #bbf7d0;
+    }
+
