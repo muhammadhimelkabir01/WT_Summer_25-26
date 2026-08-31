@@ -200,3 +200,28 @@ require_once __DIR__ . '/../layouts/header.php';
             <table class="clean-table">
                 <thead>
                     <tr>
+
+                     <th>Item</th>
+                        <th>Requested By</th>
+                        <th>Duration</th>
+                        <th>Payment</th>
+                        <th>Booking Status</th>
+                        <th style="text-align: center;">Manage Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <?php foreach ($incomingRentals as $req): ?>
+                        <tr>
+                            <td><strong style="color: #0f172a;"><?= htmlspecialchars($req['title']); ?></strong></td>
+                            <td>
+                                <div class="student-chip">
+                                    <strong><?= htmlspecialchars($req['student_name']); ?></strong>
+                                    <a href="mailto:<?= htmlspecialchars($req['student_email']); ?>">
+                                        ✉ <?= htmlspecialchars($req['student_email']); ?>
+                                    </a>
+                                </div>
+                            </td>
+                            <td style="color: #475569; white-space: nowrap;">
+                                <?= htmlspecialchars($req['start_date']); ?> <span style="color:#94a3b8;">to</span> <?= htmlspecialchars($req['end_date']); ?>
+                            </td>
+                            <td>
