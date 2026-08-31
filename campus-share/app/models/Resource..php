@@ -29,3 +29,18 @@ class Resource {
         if (!empty($categoryId)) {
             $sql .= " AND r.category_id = :cat_id";
             $params[':cat_id'] = $categoryId;
+
+             }
+        if (!empty($sharingType)) {
+            $sql .= " AND r.sharing_type = :sharing_type";
+            $params[':sharing_type'] = $sharingType;
+        }
+
+        $sql .= " ORDER BY r.created_at DESC";
+        $stmt = $this->db->prepare($sql);
+        $stmt->execute($params);
+        return $stmt->fetchAll();
+    }
+
+    public function getById($id) {
+        $sql = "SELECT r.*, c.category_name, u.full_name as owner_name, u.email as owner_email 
