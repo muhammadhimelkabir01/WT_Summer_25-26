@@ -99,3 +99,56 @@ require_once __DIR__ . '/../layouts/header.php';
         border: 1px solid #bbf7d0;
     }
 
+    .badge-unpaid {
+        background: #fee2e2;
+        color: #b91c1c;
+        border: 1px solid #fecaca;
+    }
+
+    .badge-pending {
+        background: #fef3c7;
+        color: #b45309;
+        border: 1px solid #fde68a;
+    }
+
+    .badge-accepted {
+        background: #e0f2fe;
+        color: #0369a1;
+        border: 1px solid #bae6fd;
+    }
+
+    .badge-handed {
+        background: #ede9fe;
+        color: #6d28d9;
+        border: 1px solid #ddd6fe;
+    }
+
+    .badge-returned {
+        background: #f1f5f9;
+        color: #475569;
+        border: 1px solid #cbd5e1;
+    }
+
+    /* Action Buttons */
+    .btn-action-accept {
+        background-color: #0284c7;
+        color: #ffffff !important;
+        padding: 6px 12px;
+        border-radius: 4px;
+        font-size: 12px;
+        font-weight: 600;
+        text-decoration: none;
+        display: inline-block;
+    }
+    .btn-action-accept:hover { background-color: #0369a1; }
+
+    .btn-action-handover {
+        background-color: #7c3aed;
+        color: #ffffff !important;
+        padding: 6px 12px;
+        border-radius: 4px;
+        font-size: 12px;
+        font-weight: 600;
+        text-decoration: none;
+        display: inline-block;
+    }
