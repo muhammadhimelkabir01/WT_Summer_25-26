@@ -317,4 +317,58 @@ require_once __DIR__ . '/../layouts/header.php';
                     <label>Deposit (৳)</label>
                     <input type="number" step="0.01" name="security_deposit" value="0.00" required>
                 </div>
-            </div>                                   
+            </div>
+            
+            <div class="form-group">
+                <label>Description</label>
+                <textarea name="description" rows="3" required></textarea>
+            </div>
+
+            <button type="submit" class="btn-primary" style="width: 100%; padding: 10px; margin-top: 5px;">Post Resource</button>
+        </form>
+    </div>
+
+    <!-- Right: My Listed Items Catalog -->
+    <div class="custom-panel">
+        <div class="panel-header-title"> My Listed Catalog</div>
+        <?php if (empty($myResources)): ?>
+            <p style="color: #64748b; font-size: 13px;">You have not listed any resources yet.</p>
+        <?php else: ?>
+            <div class="table-container">
+                <table class="clean-table">
+                    <thead>
+                        <tr>
+                            <th>Title</th>
+                            <th>Category</th>
+                            <th>Type</th>
+                            <th style="text-align: center;">Action</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <?php foreach ($myResources as $item): ?>
+                            <tr>
+                                <td><strong style="color: #0f172a;"><?= htmlspecialchars($item['title']); ?></strong></td>
+                                <td><?= htmlspecialchars($item['category_name'] ?? 'Academic'); ?></td>
+                                <td>
+                                    <span class="badge-status <?= $item['sharing_type'] === 'rent' ? 'badge-accepted' : 'badge-paid'; ?>">
+                                        <?= strtoupper(htmlspecialchars($item['sharing_type'])); ?>
+                                    </span>
+                                </td>
+                                <td style="text-align: center;">
+                                    <a href="index.php?route=owner/delete-item&id=<?= $item['resource_id']; ?>" 
+                                       onclick="return confirm('Are you sure you want to delete this resource listing?');"
+                                       style="color: #dc2626; font-weight: 600; font-size: 12px; text-decoration: none;">
+                                        Delete
+                                    </a>
+                                </td>
+                            </tr>
+                        <?php endforeach; ?>
+                    </tbody>
+                </table>
+            </div>
+        <?php endif; ?>
+    </div>
+
+</div>
+
+<?php require_once __DIR__ . '/../layouts/footer.php'; ?>
