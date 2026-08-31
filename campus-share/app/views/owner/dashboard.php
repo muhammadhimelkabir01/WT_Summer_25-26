@@ -152,3 +152,26 @@ require_once __DIR__ . '/../layouts/header.php';
         text-decoration: none;
         display: inline-block;
     }
+
+     }
+    .btn-action-handover:hover { background-color: #6d28d9; }
+
+    .btn-action-return {
+        background-color: #16a34a;
+        color: #ffffff !important;
+        padding: 6px 12px;
+        border-radius: 4px;
+        font-size: 12px;
+        font-weight: 600;
+        text-decoration: none;
+        display: inline-block;
+    }
+    .btn-action-return:hover { background-color: #15803d; }
+
+    .student-chip {
+        display: flex;
+        flex-direction: column;
+        gap: 3px;
+    }
+    .student-chip strong {
+        color: #0f172a;
