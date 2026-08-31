@@ -249,3 +249,34 @@ require_once __DIR__ . '/../layouts/header.php';
                                     <a href="index.php?route=owner/update-status&id=<?= $req['rental_id']; ?>&status=accepted" class="btn-action-accept">
                                         Accept Request
                                     </a>
+   <?php elseif ($st === 'accepted'): ?>
+                                    <a href="index.php?route=owner/update-status&id=<?= $req['rental_id']; ?>&status=handed_over" class="btn-action-handover">
+                                        Mark Handed Over
+                                    </a>
+                                <?php elseif ($st === 'handed_over'): ?>
+                                    <a href="index.php?route=owner/update-status&id=<?= $req['rental_id']; ?>&status=returned" class="btn-action-return">
+                                        Confirm Return
+                                    </a>
+                                <?php else: ?>
+                                    <span style="color: #94a3b8; font-weight: 600; font-size: 12px;">Completed</span>
+                                <?php endif; ?>
+                            </td>
+                        </tr>
+                    <?php endforeach; ?>
+                </tbody>
+            </table>
+        </div>
+    <?php endif; ?>
+</div>
+
+<!-- Section 2: Split Layout (Post Resource & Listed Catalog) -->
+<div class="dashboard-grid">
+    
+    <!-- Left: Post Resource Form -->
+    <div class="custom-panel">
+        <div class="panel-header-title">➕ Post New Resource</div>
+        <form action="index.php?route=owner/post-item" method="POST" autocomplete="off">
+            <div class="form-group">
+                <label>Item Title</label>
+                <input type="text" name="title" required autocomplete="off">
+            </div>                                   
