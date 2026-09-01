@@ -36,3 +36,18 @@ class AdminController {
             exit;
         }
     }
+
+    public function addCategory() {
+        if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+            $name = trim($_POST['category_name'] ?? '');
+            $desc = trim($_POST['description'] ?? '');
+
+            if (!empty($name)) {
+                $stmt = $this->db->prepare("INSERT INTO `category` (`category_name`, `description`) VALUES (:name, :desc)");
+                $stmt->execute([':name' => $name, ':desc' => $desc]);
+                header("Location: index.php?route=admin/dashboard&msg=cat_added");
+                exit;
+            }
+        }
+    }
+}
