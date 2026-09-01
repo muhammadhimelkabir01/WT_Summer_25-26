@@ -183,3 +183,60 @@ require_once __DIR__ . '/../layouts/header.php';
         <div class="metric-value" style="color: #db2777;">৳<?= number_format($totalRevenue ?? 0, 2); ?></div>
     </div>
 </div>
+
+<!-- User Governance Section -->
+<div class="custom-panel">
+    <div class="panel-header-title">🛡️ User Account Governance & Verification</div>
+    <div class="table-container">
+        <table class="clean-table">
+            <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>Student ID</th>
+                    <th>Institutional Email</th>
+                    <th>Role</th>
+                    <th>Verification</th>
+                    <th>Status</th>
+                    <th style="text-align: center;">Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                <?php if (empty($users)): ?>
+                    <tr>
+                        <td colspan="7" style="text-align: center; color: #94a3b8; padding: 20px;">No registered accounts found.</td>
+                    </tr>
+                <?php else: ?>
+                    <?php foreach ($users as $u): ?>
+                        <tr>
+                            <td><strong style="color: #0f172a;"><?= htmlspecialchars($u['full_name']); ?></strong></td>
+                            <td style="font-family: monospace; color: #475569;"><?= htmlspecialchars($u['student_id']); ?></td>
+                            <td><?= htmlspecialchars($u['email']); ?></td>
+                            <td><span class="badge-status badge-role"><?= strtoupper(htmlspecialchars($u['role'])); ?></span></td>
+                            <td>
+                                <span class="badge-status <?= $u['is_verified'] ? 'badge-verified' : 'badge-pending'; ?>">
+                                    <?= $u['is_verified'] ? 'Verified' : 'Pending'; ?>
+                                </span>
+                            </td>
+                            <td>
+                                <span class="badge-status <?= $u['status'] === 'active' ? 'badge-active' : 'badge-suspended'; ?>">
+                                    <?= strtoupper(htmlspecialchars($u['status'])); ?>
+                                </span>
+                            </td>
+                            <td style="text-align: center; white-space: nowrap;">
+                                <?php if ($u['status'] === 'active'): ?>
+                                    <a href="index.php?route=admin/update-user&id=<?= $u['user_id']; ?>&status=suspended" class="btn-action-suspend">
+                                        Suspend
+                                    </a>
+                                <?php else: ?>
+                                    <a href="index.php?route=admin/update-user&id=<?= $u['user_id']; ?>&status=active" class="btn-action-activate">
+                                        Activate
+                                    </a>
+                                <?php endif; ?>
+                            </td>
+                        </tr>
+                    <?php endforeach; ?>
+                <?php endif; ?>
+            </tbody>
+        </table>
+    </div>
+</div>
