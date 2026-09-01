@@ -13,3 +13,8 @@ require_once __DIR__ . '/../layouts/header.php';
         font-weight: 700;
         margin-bottom: 4px;
     }
+    .admin-header p {
+        color: #64748b;
+        font-size: 13px;
+        margin: 0;
+    }
