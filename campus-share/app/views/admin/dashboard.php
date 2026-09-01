@@ -260,3 +260,37 @@ require_once __DIR__ . '/../layouts/header.php';
             <button type="submit" class="btn-primary" style="width: 100%; padding: 10px; margin-top: 5px;">Add Category</button>
         </form>
     </div>
+
+    <!-- Right: Existing Categories -->
+    <div class="custom-panel">
+        <div class="panel-header-title">📂 Platform Categories</div>
+        <div class="table-container">
+            <table class="clean-table">
+                <thead>
+                    <tr>
+                        <th>Category Name</th>
+                        <th>Description</th>
+                        <th style="text-align: center;">Listed Items</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <?php if (empty($categories)): ?>
+                        <tr>
+                            <td colspan="3" style="text-align: center; color: #94a3b8; padding: 20px;">No categories added yet.</td>
+                        </tr>
+                    <?php else: ?>
+                        <?php foreach ($categories as $cat): ?>
+                            <tr>
+                                <td><strong style="color: #0f172a;"><?= htmlspecialchars($cat['category_name']); ?></strong></td>
+                                <td style="color: #64748b;"><?= htmlspecialchars($cat['description'] ?? '—'); ?></td>
+                                <td style="text-align: center; font-weight: 700; color: #0284c7;"><?= htmlspecialchars($cat['item_count'] ?? 0); ?></td>
+                            </tr>
+                        <?php endforeach; ?>
+                    <?php endif; ?>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+<?php require_once __DIR__ . '/../layouts/footer.php'; ?>
