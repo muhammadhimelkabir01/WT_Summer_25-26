@@ -34,3 +34,27 @@ class AuthController {
                         require_once __DIR__ . '/../views/auth/login.php';
                         return;
                     }
+                    $_SESSION['user_id'] = $user['user_id'];
+                    $_SESSION['full_name'] = $user['full_name'];
+                    $_SESSION['role'] = strtolower($user['role']);
+                    $_SESSION['is_verified'] = $user['is_verified'];
+
+                    
+                    if ($_SESSION['role'] === 'admin') {
+                        header("Location: index.php?route=admin/dashboard");
+                    } elseif ($_SESSION['role'] === 'owner') {
+                        header("Location: index.php?route=owner/dashboard");
+                    } else {
+                        header("Location: index.php?route=student/dashboard");
+                    }
+                    exit;
+                } else {
+                    $error = "Incorrect password. Please try again.";
+                }
+            } else {
+                $error = "No user found with this Email or Student ID.";
+            }
+
+            require_once __DIR__ . '/../views/auth/login.php';
+        }
+    }
