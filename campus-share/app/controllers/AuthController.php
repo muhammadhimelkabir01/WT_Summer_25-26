@@ -8,3 +8,11 @@ class AuthController {
     public function __construct() {
         $this->userModel = new User();
     }
+
+     public function showLogin() {
+        require_once __DIR__ . '/../views/auth/login.php';
+    }
+
+    public function showRegister() {
+        require_once __DIR__ . '/../views/auth/register.php';
+    }
