@@ -10,3 +10,10 @@ require_once __DIR__ . '/../layouts/header.php';
         <div style="background-color: #f8d7da; color: #721c24; padding: 12px; border-radius: 4px; margin-bottom: 18px; font-size: 13px;">
             <?= htmlspecialchars($error); ?>
         </div>
+        
+        <?php endif; ?>
+
+    <?php if (isset($_GET['registered'])): ?>
+        <div style="background-color: #d4edda; color: #155724; padding: 12px; border-radius: 4px; margin-bottom: 18px; font-size: 13px;">
+            Registration successful! Please sign in.
+        </div>
