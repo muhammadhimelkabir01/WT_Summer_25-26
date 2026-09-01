@@ -62,3 +62,26 @@ require_once __DIR__ . '/../layouts/header.php';
         box-shadow: 0 2px 8px rgba(0, 0, 0, 0.02);
         margin-bottom: 25px;
     }
+
+    .panel-header-title {
+        color: #003366;
+        font-size: 16px;
+        font-weight: 700;
+        margin-bottom: 16px;
+        padding-bottom: 10px;
+        border-bottom: 2px solid #f1f5f9;
+        display: flex;
+        align-items: center;
+        gap: 8px;
+    }
+
+    .table-container {
+        width: 100%;
+        overflow-x: auto;
+    }
+
+    .clean-table {
+        width: 100%;
+        border-collapse: collapse;
+        font-size: 13px;
+    }
