@@ -240,3 +240,23 @@ require_once __DIR__ . '/../layouts/header.php';
         </table>
     </div>
 </div>
+
+<!-- Bottom Grid: Add Category & List Categories -->
+<div class="admin-grid">
+    <!-- Left: Add Category Form -->
+    <div class="custom-panel">
+        <div class="panel-header-title">➕ Create Category</div>
+        <form action="index.php?route=admin/add-category" method="POST" autocomplete="off">
+            <div class="form-group">
+                <label>Category Name</label>
+                <input type="text" name="category_name" placeholder="e.g. Robotics & IoT" required autocomplete="off">
+            </div>
+
+            <div class="form-group">
+                <label>Description</label>
+                <textarea name="description" rows="3" placeholder="Academic field notes..."></textarea>
+            </div>
+
+            <button type="submit" class="btn-primary" style="width: 100%; padding: 10px; margin-top: 5px;">Add Category</button>
+        </form>
+    </div>
