@@ -47,3 +47,18 @@ require_once __DIR__ . '/../layouts/header.php';
         letter-spacing: 0.5px;
         margin-bottom: 6px;
     }
+
+    .metric-value {
+        color: #0f172a;
+        font-size: 24px;
+        font-weight: 700;
+    }
+
+    .custom-panel {
+        background: #ffffff;
+        border: 1px solid #e2e8f0;
+        border-radius: 8px;
+        padding: 20px 24px;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.02);
+        margin-bottom: 25px;
+    }
