@@ -17,3 +17,17 @@ class User {
         ]);
         return $stmt->fetch();
     }
+
+    public function register($fullName, $email, $studentId, $password, $role = 'student') {
+        $hash = password_hash($password, PASSWORD_BCRYPT);
+        $stmt = $this->db->prepare("INSERT INTO `user` (`full_name`, `email`, `student_id`, `password`, `role`, `is_verified`, `status`) 
+                                    VALUES (:full_name, :email, :student_id, :password, :role, 0, 'active')");
+        return $stmt->execute([
+            ':full_name'  => $fullName,
+            ':email'       => $email,
+            ':student_id'  => $studentId,
+            ':password'    => $hash,
+            ':role'        => $role
+        ]);
+    }
+}
