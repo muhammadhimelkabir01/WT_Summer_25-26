@@ -58,3 +58,27 @@ class AuthController {
             require_once __DIR__ . '/../views/auth/login.php';
         }
     }
+    public function handleRegister() {
+        if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+            $fullName = trim($_POST['full_name'] ?? '');
+            $email = trim($_POST['email'] ?? '');
+            $studentId = trim($_POST['student_id'] ?? '');
+            $password = trim($_POST['password'] ?? '');
+            $role = $_POST['role'] ?? 'student';
+
+            if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
+                $error = "Please provide a valid institutional email.";
+                require_once __DIR__ . '/../views/auth/register.php';
+                return;
+            }
+
+            try {
+                $this->userModel->register($fullName, $email, $studentId, $password, $role);
+                header("Location: index.php?route=login&registered=1");
+                exit;
+            } catch (PDOException $e) {
+                $error = "Student ID or Email already registered!";
+                require_once __DIR__ . '/../views/auth/register.php';
+            }
+        }
+    }
