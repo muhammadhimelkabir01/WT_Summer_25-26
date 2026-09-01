@@ -119,3 +119,67 @@ require_once __DIR__ . '/../layouts/header.php';
         font-weight: 700;
         text-transform: uppercase;
     }
+
+    .badge-active { background: #dcfce7; color: #15803d; border: 1px solid #bbf7d0; }
+    .badge-suspended { background: #fee2e2; color: #b91c1c; border: 1px solid #fecaca; }
+    .badge-verified { background: #dcfce7; color: #15803d; border: 1px solid #bbf7d0; }
+    .badge-pending { background: #fef3c7; color: #b45309; border: 1px solid #fde68a; }
+    .badge-role { background: #e0f2fe; color: #0369a1; border: 1px solid #bae6fd; }
+
+   
+    .btn-action-suspend {
+        background-color: #ef4444;
+        color: #ffffff !important;
+        padding: 4px 10px;
+        border-radius: 4px;
+        font-size: 11px;
+        font-weight: 600;
+        text-decoration: none;
+        display: inline-block;
+    }
+    .btn-action-suspend:hover { background-color: #dc2626; }
+
+    .btn-action-activate {
+        background-color: #10b981;
+        color: #ffffff !important;
+        padding: 4px 10px;
+        border-radius: 4px;
+        font-size: 11px;
+        font-weight: 600;
+        text-decoration: none;
+        display: inline-block;
+    }
+    .btn-action-activate:hover { background-color: #059669; }
+
+    .admin-grid {
+        display: grid;
+        grid-template-columns: 340px 1fr;
+        gap: 22px;
+        align-items: start;
+    }
+</style>
+
+<div class="admin-header">
+    <h2>Administrative Control Panel</h2>
+    <p>Platform governance, student ID verifications, category control, and financial analytics.</p>
+</div>
+
+<!-- Metrics Overview -->
+<div class="metrics-grid">
+    <div class="metric-card">
+        <div class="metric-title">Total Registered Users</div>
+        <div class="metric-value"><?= htmlspecialchars($totalUsers ?? 0); ?></div>
+    </div>
+    <div class="metric-card card-green">
+        <div class="metric-title">Listed Resources</div>
+        <div class="metric-value"><?= htmlspecialchars($totalResources ?? 0); ?></div>
+    </div>
+    <div class="metric-card card-amber">
+        <div class="metric-title">Rental Bookings</div>
+        <div class="metric-value"><?= htmlspecialchars($totalBookings ?? 0); ?></div>
+    </div>
+    <div class="metric-card card-pink">
+        <div class="metric-title">Simulated Escrow Volume</div>
+        <div class="metric-value" style="color: #db2777;">৳<?= number_format($totalRevenue ?? 0, 2); ?></div>
+    </div>
+</div>
