@@ -24,3 +24,15 @@ class AdminController {
 
         require_once __DIR__ . '/../views/admin/dashboard.php';
     }
+
+    public function updateUserStatus() {
+        $userId = $_GET['id'] ?? null;
+        $status = $_GET['status'] ?? null;
+
+        if ($userId && in_array($status, ['active', 'suspended'])) {
+            $stmt = $this->db->prepare("UPDATE `user` SET `status` = :status, `is_verified` = 1 WHERE `user_id` = :id");
+            $stmt->execute([':status' => $status, ':id' => $userId]);
+            header("Location: index.php?route=admin/dashboard&msg=user_updated");
+            exit;
+        }
+    }
