@@ -59,3 +59,17 @@ require_once __DIR__ . '/../layouts/header.php';
                         <?= htmlspecialchars(mb_strimwidth($res['description'], 0, 85, '...')); ?>
                     </p>
                 </div>
+                <div style="display: flex; justify-content: space-between; align-items: center; border-top: 1px solid #f1f5f9; padding-top: 12px;">
+                    <div style="font-weight: 700; font-size: 14px; color: #0f172a;">
+                        <?= $res['sharing_type'] === 'rent' ? '৳' . number_format($res['daily_rate'], 2) . ' / day' : '<span style="color:#16a34a;">FREE</span>'; ?>
+                    </div>
+                    <a href="index.php?route=details&id=<?= $res['resource_id']; ?>" class="btn-primary" style="padding: 6px 14px; font-size: 12px; text-decoration: none;">
+                        View & Request
+                    </a>
+                </div>
+            </div>
+        <?php endforeach; ?>
+    <?php endif; ?>
+</div>
+
+<?php require_once __DIR__ . '/../layouts/footer.php'; ?>
