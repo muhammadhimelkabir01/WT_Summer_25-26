@@ -35,3 +35,15 @@ require_once __DIR__ . '/../layouts/header.php';
         border-left: 4px solid #0284c7;
         box-shadow: 0 2px 6px rgba(0, 0, 0, 0.02);
     }
+    .metric-card.card-green { border-left-color: #10b981; }
+    .metric-card.card-amber { border-left-color: #f59e0b; }
+    .metric-card.card-pink { border-left-color: #ec4899; }
+
+    .metric-title {
+        color: #64748b;
+        font-size: 11px;
+        font-weight: 700;
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
+        margin-bottom: 6px;
+    }
