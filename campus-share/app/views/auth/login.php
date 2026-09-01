@@ -29,3 +29,16 @@ require_once __DIR__ . '/../layouts/header.php';
             <label style="display: block; font-weight: 600; font-size: 13px; color: #334155; margin-bottom: 6px;">Password</label>
             <input type="password" name="password" class="auth-form-input" required autocomplete="new-password">
         </div>
+
+         <button type="submit" class="btn-primary" style="width: 100%; padding: 11px; font-size: 15px; font-weight: 600;">
+            Sign In
+        </button>
+    </form>
+
+    <div style="text-align: center; margin-top: 18px; font-size: 13px;">
+        <span style="color: #64748b;">Don't have an account?</span> 
+        <a href="index.php?route=register" style="color: #003366; font-weight: 600; text-decoration: none;">Create Account</a>
+    </div>
+</div>
+
+<?php require_once __DIR__ . '/../layouts/footer.php'; ?>
