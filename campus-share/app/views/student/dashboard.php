@@ -1,4 +1,5 @@
 <?php
+// app/views/student/dashboard.php
 require_once __DIR__ . '/../layouts/header.php';
 ?>
 
@@ -17,7 +18,6 @@ require_once __DIR__ . '/../layouts/header.php';
         font-size: 14px;
         margin: 0;
     }
-    
     .custom-card {
         background: #ffffff;
         border-radius: 12px;
@@ -26,7 +26,6 @@ require_once __DIR__ . '/../layouts/header.php';
         padding: 24px;
         margin-bottom: 30px;
     }
-
     .card-title {
         color: #1e293b;
         font-size: 17px;
@@ -38,19 +37,16 @@ require_once __DIR__ . '/../layouts/header.php';
         align-items: center;
         gap: 8px;
     }
-
     .table-responsive {
         width: 100%;
         overflow-x: auto;
     }
-
     .dash-table {
         width: 100%;
         border-collapse: separate;
         border-spacing: 0;
         margin: 0;
     }
-
     .dash-table th {
         background-color: #f8fafc;
         color: #475569;
@@ -63,7 +59,6 @@ require_once __DIR__ . '/../layouts/header.php';
         border-bottom: 1px solid #cbd5e1;
         white-space: nowrap;
     }
-
     .dash-table td {
         padding: 16px;
         vertical-align: middle;
@@ -72,12 +67,10 @@ require_once __DIR__ . '/../layouts/header.php';
         font-size: 14px;
         white-space: nowrap;
     }
-
     .dash-table tbody tr:hover {
         background-color: #f8fafc;
         transition: background-color 0.2s ease;
     }
-
     .owner-info {
         display: flex;
         flex-direction: column;
@@ -104,7 +97,6 @@ require_once __DIR__ . '/../layouts/header.php';
     .owner-email-chip:hover {
         background-color: #dbeafe;
     }
-
     .badge-soft-success {
         background-color: #dcfce7;
         color: #15803d;
@@ -115,7 +107,6 @@ require_once __DIR__ . '/../layouts/header.php';
         font-weight: 600;
         display: inline-block;
     }
-
     .badge-soft-warning {
         background-color: #fef3c7;
         color: #b45309;
@@ -126,7 +117,6 @@ require_once __DIR__ . '/../layouts/header.php';
         font-weight: 600;
         display: inline-block;
     }
-
     .btn-pay-now {
         background: linear-gradient(135deg, #e2136e 0%, #c2105e 100%);
         color: white !important;
@@ -141,7 +131,6 @@ require_once __DIR__ . '/../layouts/header.php';
     .btn-pay-now:hover {
         opacity: 0.95;
     }
-
     .btn-cancel-link {
         color: #ef4444;
         font-size: 13px;
@@ -174,7 +163,7 @@ require_once __DIR__ . '/../layouts/header.php';
 
 <!-- Section 1: Rental Bookings -->
 <div class="custom-card">
-    <div class="card-title"> My Rental Bookings</div>
+    <div class="card-title">My Rental Bookings</div>
     
     <?php if (empty($rentals)): ?>
         <p style="color: #64748b; font-size: 14px; margin: 10px 0;">No active rental requests found. <a href="index.php?route=home" style="color: #2563eb; font-weight: 600;">Browse catalog</a> to rent academic items.</p>
@@ -228,8 +217,18 @@ require_once __DIR__ . '/../layouts/header.php';
                                     <?= strtoupper(htmlspecialchars($r['status'])); ?>
                                 </span>
                             </td>
-                            <td style="text-align: center;">
-                                <?php if ($r['status'] === 'pending'): ?>
+                            <td style="text-align: center; white-space: nowrap;">
+                                <?php if (!empty($r['payment_status']) && strtolower(trim($r['payment_status'])) === 'paid'): ?>
+                                    <?php 
+                                        $calcTotal = number_format($r['total_rent'] + $r['security_deposit'], 2, '.', '');
+                                        $durStr = htmlspecialchars($r['start_date']) . ' to ' . htmlspecialchars($r['end_date']);
+                                    ?>
+                                    <button type="button" 
+                                            onclick="printReceipt('<?= htmlspecialchars(addslashes($r['title'])); ?>', '<?= htmlspecialchars(addslashes($r['owner_name'])); ?>', '<?= htmlspecialchars(addslashes($r['owner_email'])); ?>', '<?= $durStr; ?>', '<?= number_format($r['total_rent'], 2); ?>', '<?= number_format($r['security_deposit'], 2); ?>', '<?= $calcTotal; ?>', '<?= htmlspecialchars($r['transaction_id'] ?? 'N/A'); ?>')"
+                                            style="background: #0284c7; color: #fff; border: none; padding: 4px 10px; border-radius: 4px; font-size: 11px; font-weight: 600; cursor: pointer; display: inline-flex; align-items: center; gap: 4px;">
+                                        🖨️ Receipt
+                                    </button>
+                                <?php elseif ($r['status'] === 'pending'): ?>
                                     <a href="index.php?route=student/cancel-rental&id=<?= $r['rental_id']; ?>" 
                                        class="btn-cancel-link"
                                        onclick="return confirm('Are you sure you want to cancel this booking?');">
@@ -249,7 +248,7 @@ require_once __DIR__ . '/../layouts/header.php';
 
 <!-- Section 2: Free Donation Claims -->
 <div class="custom-card">
-    <div class="card-title"> My Free Donation Claims</div>
+    <div class="card-title">My Free Donation Claims</div>
     <?php if (empty($donations)): ?>
         <p style="color: #64748b; font-size: 14px; margin: 10px 0;">No donation requests submitted yet.</p>
     <?php else: ?>
@@ -282,4 +281,5 @@ require_once __DIR__ . '/../layouts/header.php';
     <?php endif; ?>
 </div>
 
+<script src="js/receipt-print.js"></script>
 <?php require_once __DIR__ . '/../layouts/footer.php'; ?>
